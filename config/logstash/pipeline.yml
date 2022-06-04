@@ -1,0 +1,2 @@
+- pipeline.id: demo
+  path.config: ./conf/demo.conf

@@ -157,3 +157,5 @@ replay_pid*
 # End of https://www.toptal.com/developers/gitignore/api/java,kotlin,visualstudiocode,intellij+all
 .gradle
 HELP.md
+build/
+config/elasticsearch/data/**

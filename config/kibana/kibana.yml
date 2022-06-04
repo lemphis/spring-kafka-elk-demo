@@ -1,13 +1,6 @@
-server:
-  name: kibana
-  host: "0.0.0.0"
-elasticsearch:
-  hosts:
-    - http://elasticsearch:9200
-  serviceAccountToken: "edited"
-xpack:
-  monitoring:
-    ui:
-      container:
-        elasticsearch:
-          enabled: true
+server.name: kibana
+server.host: "0.0.0.0"
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+elasticsearch.username: root
+elasticsearch.password: root
+monitoring.ui.container.elasticsearch.enabled: true

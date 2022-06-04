@@ -2,12 +2,12 @@ version: "3"
 
 services:
   zookeeper:
-    container_name: local-zookeeper
+    container_name: zookeeper
     image: zookeeper:3.8.0
     ports:
       - "2181:2181"
   kafka:
-    container_name: local-kafka
+    container_name: kafka
     image: wurstmeister/kafka:2.13-2.8.1
     ports:
       - "9092:9092"
@@ -21,15 +21,30 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CREATE_TOPICS: demo:1:1
   logstash:
-    container_name: local-logstash
+    container_name: logstash
     image: logstash:8.2.0
     ports:
       - "5001:5000"
       - "9600:9600"
+    volumes:
+      - type: bind
+        source: ./config/logstash/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./config/logstash/pipeline.yml
+        target: /usr/share/logstash/pipeline.yml
+        read_only: true
+      - type: bind
+        source: ./config/logstash/conf/demo.conf
+        target: /usr/share/logstash/conf/demo.conf
+        read_only: true
     depends_on:
       - elasticsearch
+    # networks:
+    #   - elk
   elasticsearch:
-    container_name: local-elasticsearch
+    container_name: elasticsearch
     image: elasticsearch:8.2.0
     ports:
       - "9200:9200"
@@ -38,15 +53,16 @@ services:
       - type: bind
         source: ./config/elasticsearch/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
-      - type: volume
-        source: elasticsearch-volume
+        read_only: true
+      - type: bind
+        source: ./config/elasticsearch/data
         target: /usr/share/elasticsearch/data
     environment:
       discovery.type: single-node
-      ELASTIC_USERNAME: elastic
+      ELASTIC_USERNAME: root
       ELASTIC_PASSWORD: root
   kibana:
-    container_name: local-kibana
+    container_name: kibana
     image: kibana:8.2.0
     ports:
       - "5601:5601"
@@ -57,6 +73,3 @@ services:
         read_only: true
     depends_on:
       - elasticsearch
-
-volumes:
-  elasticsearch-volume:
