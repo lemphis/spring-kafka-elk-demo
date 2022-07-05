@@ -41,8 +41,6 @@ services:
         read_only: true
     depends_on:
       - elasticsearch
-    # networks:
-    #   - elk
   elasticsearch:
     container_name: elasticsearch
     image: elasticsearch:8.2.0
@@ -59,8 +57,6 @@ services:
         target: /usr/share/elasticsearch/data
     environment:
       discovery.type: single-node
-      ELASTIC_USERNAME: root
-      ELASTIC_PASSWORD: root
   kibana:
     container_name: kibana
     image: kibana:8.2.0
