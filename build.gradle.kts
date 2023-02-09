@@ -23,7 +23,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.kafka:spring-kafka")
-	implementation("org.elasticsearch.client:elasticsearch-rest-client:8.2.0")
+	implementation("co.elastic.clients:elasticsearch-java:8.2.0")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
