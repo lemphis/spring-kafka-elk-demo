@@ -159,3 +159,4 @@ replay_pid*
 HELP.md
 build/
 config/elasticsearch/data/**
+!config/elasticsearch/data/nodes
