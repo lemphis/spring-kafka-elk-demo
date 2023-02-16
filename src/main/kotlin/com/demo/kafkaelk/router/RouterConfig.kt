@@ -17,7 +17,7 @@ class RouterConfig(
 	fun apiRouter() = coRouter {
 		(accept(APPLICATION_JSON) and "/client").nest {
 			GET("indices") { clientRequestHandler.indices() }
-//			GET("/log") { clientRequestHandler.getAll(it) }
+			GET("/log") { clientRequestHandler.getAll(it) }
 //			GET("/log/{message}") { clientRequestHandler.get(it) }
 			PUT("/log") { clientRequestHandler.put(it) }
 		}
